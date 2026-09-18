@@ -1,10 +1,15 @@
 :root {
-  --ink: #17212a;
+  --yellow: #fed136;
+  --navy: #173b56;
+  --navy-dark: #102c40;
+  --text: #17212a;
+  --background: #ffffff;
+  --ink: var(--text);
   --muted: #66737d;
-  --blue: #2e6f9f;
-  --blue-dark: #173b56;
-  --paper: #ffffff;
-  --soft: #f5f7f8;
+  --blue: var(--navy);
+  --blue-dark: var(--navy);
+  --paper: var(--background);
+  --soft: #f6f7f7;
   --line: #dfe5e8;
   --header-height: 64px;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -46,7 +51,7 @@ button:focus-visible,
 summary:focus-visible,
 video:focus-visible,
 iframe:focus-visible {
-  outline: 3px solid #71b6e6;
+  outline: 3px solid var(--yellow);
   outline-offset: 4px;
 }
 
@@ -60,14 +65,15 @@ iframe:focus-visible {
   justify-content: space-between;
   padding: 0 clamp(20px, 5vw, 72px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(12, 28, 40, 0.76);
+  background: rgba(16, 44, 64, 0.92);
   color: #fff;
   backdrop-filter: blur(8px);
 }
 
 .site-name {
+  color: var(--yellow);
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 750;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
@@ -85,8 +91,9 @@ iframe:focus-visible {
   transition: color 160ms ease;
 }
 
-.site-header a:hover {
-  color: #a9d6f3;
+.site-header a:hover,
+.site-header a:focus-visible {
+  color: var(--yellow);
 }
 
 .hero {
@@ -95,7 +102,7 @@ iframe:focus-visible {
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #173b56 url('/images/hero.webp') center 52% / cover no-repeat;
+  background: var(--navy) url('/images/hero.webp') center 52% / cover no-repeat;
   color: #fff;
 }
 
@@ -112,20 +119,29 @@ iframe:focus-visible {
   text-align: center;
 }
 
-.eyebrow,
-.section-title {
+.eyebrow {
   font-size: 0.77rem;
   font-weight: 750;
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
+.hero-intro {
+  margin: 0 0 clamp(20px, 3vw, 28px);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3.3vw, 2.625rem);
+  font-style: italic;
+  line-height: 1.15;
+}
+
 .hero h1 {
-  margin: 18px 0 0;
-  font-size: clamp(2.9rem, 8vw, 6.7rem);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 0.95;
+  max-width: 1100px;
+  margin: 0;
+  font-size: clamp(3.5rem, 6.4vw, 4.75rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-transform: uppercase;
 }
 
 .scroll-cue {
@@ -144,7 +160,7 @@ iframe:focus-visible {
 }
 
 .home-section {
-  padding: clamp(86px, 11vw, 150px) clamp(20px, 5vw, 72px);
+  padding: clamp(88px, 9vw, 132px) clamp(20px, 5vw, 72px);
 }
 
 .section-shell,
@@ -154,8 +170,23 @@ iframe:focus-visible {
 }
 
 .section-title {
-  margin: 0 0 clamp(44px, 7vw, 82px);
-  color: var(--blue);
+  margin: 0 0 clamp(52px, 6vw, 76px);
+  color: var(--navy);
+  font-size: clamp(2rem, 3.3vw, 2.625rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  display: block;
+  width: 52px;
+  height: 4px;
+  margin: 18px auto 0;
+  background: var(--yellow);
+  content: "";
 }
 
 .focus-section {
@@ -164,21 +195,43 @@ iframe:focus-visible {
 
 .focus-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 72px);
 }
 
-.focus-list div {
-  padding: clamp(28px, 5vw, 58px) clamp(12px, 3vw, 34px);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.45rem, 3.2vw, 2.75rem);
-  line-height: 1.15;
+.focus-item {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.focus-list div + div {
-  border-left: 1px solid var(--line);
+.focus-icon {
+  display: grid;
+  width: clamp(78px, 7vw, 92px);
+  height: clamp(78px, 7vw, 92px);
+  place-items: center;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.focus-icon svg {
+  width: clamp(36px, 3.5vw, 43px);
+  height: clamp(36px, 3.5vw, 43px);
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.focus-item h3 {
+  margin: 22px 0 0;
+  color: var(--navy);
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .projects-section {
@@ -218,18 +271,29 @@ iframe:focus-visible {
   height: 36px;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--blue-dark);
+  background: var(--yellow);
+  color: var(--navy);
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 160ms ease, transform 160ms ease;
 }
 
 .project-card h3 {
-  margin: 17px 0 0;
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
-  font-weight: 620;
+  margin: 18px 0 0;
+  color: var(--navy);
+  font-size: clamp(1.125rem, 1.5vw, 1.35rem);
+  font-weight: 680;
   line-height: 1.35;
+}
+
+.project-card h3::after {
+  display: block;
+  width: 0;
+  height: 3px;
+  margin-top: 10px;
+  background: var(--yellow);
+  content: "";
+  transition: width 180ms ease;
 }
 
 .project-card a:hover img {
@@ -241,6 +305,11 @@ iframe:focus-visible {
 .project-card a:focus-visible .project-arrow {
   opacity: 1;
   transform: translateY(0);
+}
+
+.project-card a:hover h3::after,
+.project-card a:focus-visible h3::after {
+  width: 48px;
 }
 
 .site-footer {
@@ -406,21 +475,31 @@ iframe:focus-visible {
     background-position: 60% center;
   }
 
+  .hero-content {
+    padding-inline: 20px;
+  }
+
+  .hero-intro {
+    font-size: clamp(1.6rem, 8vw, 2.1rem);
+  }
+
   .hero h1 {
-    font-size: clamp(3rem, 16vw, 4.5rem);
+    font-size: clamp(2.75rem, 13vw, 4rem);
   }
 
   .focus-list {
     grid-template-columns: 1fr;
+    gap: 46px;
   }
 
-  .focus-list div {
-    padding: 26px 8px;
+  .focus-icon {
+    width: 78px;
+    height: 78px;
   }
 
-  .focus-list div + div {
-    border-top: 1px solid var(--line);
-    border-left: 0;
+  .focus-icon svg {
+    width: 37px;
+    height: 37px;
   }
 
   .project-grid {

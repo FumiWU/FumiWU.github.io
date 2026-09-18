@@ -1,0 +1,35 @@
+---
+interface Props {
+  name: 'transportation' | 'ai-or' | 'maritime';
+}
+
+const { name } = Astro.props;
+---
+
+<span class="focus-icon" aria-hidden="true">
+  {name === 'transportation' && (
+    <svg viewBox="0 0 48 48" fill="none">
+      <rect x="12" y="7" width="24" height="29" rx="6" />
+      <path d="M16 17h16M17 36l-4 6M31 36l4 6M17 42h14" />
+      <circle cx="18" cy="29" r="2" />
+      <circle cx="30" cy="29" r="2" />
+    </svg>
+  )}
+  {name === 'ai-or' && (
+    <svg viewBox="0 0 48 48" fill="none">
+      <path d="M15 15l9 9m9-9l-9 9m0 0v12M15 33l9-9 9 9" />
+      <circle cx="15" cy="15" r="5" />
+      <circle cx="33" cy="15" r="5" />
+      <circle cx="15" cy="33" r="5" />
+      <circle cx="33" cy="33" r="5" />
+      <circle cx="24" cy="24" r="5" />
+    </svg>
+  )}
+  {name === 'maritime' && (
+    <svg viewBox="0 0 48 48" fill="none">
+      <path d="M24 7v20M24 10h9l4 10H24M24 13h-8l-5 9h13" />
+      <path d="M7 27h34l-5 9H14l-7-9Z" />
+      <path d="M8 41c3 0 3-2 6-2s3 2 6 2 3-2 6-2 3 2 6 2 3-2 6-2" />
+    </svg>
+  )}
+</span>

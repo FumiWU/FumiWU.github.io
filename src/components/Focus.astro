@@ -1,10 +1,23 @@
+---
+import FocusIcon from './FocusIcon.astro';
+
+const focusAreas = [
+  { title: 'Transportation', icon: 'transportation' as const },
+  { title: 'AI in OR', icon: 'ai-or' as const },
+  { title: 'Maritime', icon: 'maritime' as const },
+];
+---
+
 <section class="home-section focus-section" id="focus" aria-labelledby="focus-title">
   <div class="section-shell">
     <h2 class="section-title" id="focus-title">Focus</h2>
     <div class="focus-list" role="list">
-      <div role="listitem">Transportation</div>
-      <div role="listitem">AI in OR</div>
-      <div role="listitem">Maritime</div>
+      {focusAreas.map((area) => (
+        <div class="focus-item" role="listitem">
+          <FocusIcon name={area.icon} />
+          <h3>{area.title}</h3>
+        </div>
+      ))}
     </div>
   </div>
 </section>
