@@ -1,0 +1,13 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+---
+
+<section class="home-section projects-section" id="projects" aria-labelledby="projects-title">
+  <div class="section-shell">
+    <h2 class="section-title" id="projects-title">Projects</h2>
+    <div class="project-grid">
+      {projects.map((project, index) => <ProjectCard project={project} eager={index < 2} />)}
+    </div>
+  </div>
+</section>

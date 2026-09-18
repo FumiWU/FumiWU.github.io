@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={project.title} description={project.summary}>
+  <Header />
+  <main class="project-page">
+    <div class="project-shell">
+      <a class="back-link" href="/#projects">← All projects</a>
+      <header class="project-header">
+        <span class="eyebrow">Project</span>
+        <h1>{project.title}</h1>
+      </header>
+
+      <section class="project-block" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">Abstract</h2>
+        <p class="project-abstract">{project.abstract}</p>
+      </section>
+
+      {project.video && (
+        <section class="project-block" aria-labelledby="video-title">
+          <h2 id="video-title">Visualization</h2>
+          <figure class="project-media">
+            <video controls playsinline preload="metadata" poster={project.video.poster}>
+              <source src={project.video.src} type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+            <figcaption>{project.video.caption}</figcaption>
+          </figure>
+        </section>
+      )}
+
+      {project.youtubeId && (
+        <section class="project-block" aria-labelledby="video-title">
+          <h2 id="video-title">Video</h2>
+          <div class="video-frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}`}
+              title={`${project.title} video`}
+              loading="lazy"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
+      )}
+
+      {project.figures.length > 0 && (
+        <section class="project-block" aria-labelledby="figures-title">
+          <h2 id="figures-title">Main Figures</h2>
+          <div class="figure-stack">
+            {project.figures.map((figure) => (
+              <figure class="project-media">
+                <img src={figure.src} alt={figure.alt} loading="lazy" decoding="async" />
+                <figcaption>{figure.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {project.links.length > 0 && (
+        <section class="project-block" aria-labelledby="links-title">
+          <h2 id="links-title">Related</h2>
+          <div class="project-links">
+            {project.links.map((link) => (
+              <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
+                {link.label}<span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

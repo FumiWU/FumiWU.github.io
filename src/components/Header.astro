@@ -1,0 +1,15 @@
+---
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+const root = home ? '' : '/';
+---
+
+<header class="site-header">
+  <a class="site-name" href="/" aria-label="Fumi Wu home">Fumi Wu</a>
+  <nav aria-label="Primary navigation">
+    <a href={`${root}#focus`}>Focus</a>
+    <a href={`${root}#projects`}>Projects</a>
+  </nav>
+</header>

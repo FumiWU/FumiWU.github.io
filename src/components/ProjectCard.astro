@@ -1,0 +1,23 @@
+---
+import type { Project } from '../data/projects';
+interface Props {
+  project: Project;
+  eager?: boolean;
+}
+const { project, eager = false } = Astro.props;
+---
+
+<article class="project-card">
+  <a href={`/projects/${project.slug}/`} aria-label={`Open ${project.title}`}>
+    <div class="project-image-wrap">
+      <img
+        src={project.cardImage}
+        alt={project.cardAlt}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+      <span class="project-arrow" aria-hidden="true">↗</span>
+    </div>
+    <h3>{project.title}</h3>
+  </a>
+</article>
