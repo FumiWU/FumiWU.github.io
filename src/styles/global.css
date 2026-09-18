@@ -102,7 +102,7 @@ iframe:focus-visible {
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--navy) url('/images/hero.webp') center 52% / cover no-repeat;
+  background: var(--navy) url('/images/hero.png') center 52% / cover no-repeat;
   color: #fff;
 }
 
